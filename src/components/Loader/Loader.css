@@ -1,0 +1,40 @@
+.loader {
+  animation: loadingAnimation 2s infinite linear;
+  border: 8px solid #0000;
+  border-color: #256ea6 #0000;
+  border-radius: 50%;
+  display: grid;
+  height: 100px;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  position: absolute;
+  top: 50%;
+  width: 100px;
+}
+
+.loader::before,
+.loader::after {
+  border: inherit;
+  border-radius: 50%;
+  content: "";
+  grid-area: 1/1;
+  margin: 4px;
+}
+
+.loader::before {
+  animation: inherit;
+  animation-direction: reverse;
+  animation-duration: 1s;
+  border-color: #2e85b8 #0000;
+}
+
+.loader::after {
+  margin: 16px;
+}
+
+@keyframes loadingAnimation {
+  100% {
+    transform: rotate(1turn);
+  }
+}

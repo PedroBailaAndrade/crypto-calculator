@@ -1,0 +1,33 @@
+.navigation {
+  display: flex;
+  height: fit-content;
+  justify-content: center;
+  position: relative;
+}
+
+.navigation::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 2px);
+  border-bottom: 2px solid #e0e0d7;
+  z-index: 2;
+}
+
+.tab {
+  color: #8a8a86;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+  padding: 24px 16px 14px;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+.tab.isActive {
+  border-bottom: 2px solid #1e5891;
+  color: #1e5891;
+  content: "";
+}

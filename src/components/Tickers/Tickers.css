@@ -1,0 +1,14 @@
+.tickers-content-wrapper {
+  align-content: flex-end;
+  align-items: flex-end;
+  display: grid;
+  flex-direction: row;
+  gap: 16px;
+  grid-template-columns: 192px 192px 192px;
+  justify-content: center;
+  margin-bottom: 78px;
+}
+
+.tickers-results {
+  padding-bottom: 55px;
+}

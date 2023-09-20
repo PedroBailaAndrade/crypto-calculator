@@ -1,0 +1,53 @@
+.card {
+  background: #ffffff;
+  border: 1px solid #e0e0d7;
+  border-radius: 4px;
+  box-shadow: inset 1px 1px 0 0 rgba(255, 255, 255, 0.8);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 870px;
+  margin-bottom: 14px;
+  padding: 24px 32px;
+  row-gap: 8px;
+}
+
+.card p {
+  color: #585f66;
+  font-family: "Ubuntu-Regular";
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 16px;
+  margin: 0;
+}
+
+.card .base-target {
+  color: #454b51;
+  font-family: "Ubuntu-Bold";
+  font-size: 32px;
+  letter-spacing: 0;
+  line-height: 32px;
+  margin-bottom: 8px;
+}
+
+.card .link {
+  color: #1c4e86;
+  font-family: "Ubuntu-Medium";
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 16px;
+}
+
+.card .label {
+  color: #4e555b;
+  font-family: "Ubuntu-Bold";
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 16px;
+  text-transform: none;
+}
+
+.card .link,
+.card .market-name,
+.card .market-volume {
+  text-align: right;
+}
