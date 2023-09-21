@@ -13,15 +13,15 @@ const Calculator = () => {
     currencies,
     inputAmount,
     inputCurrency,
-    previousCalculatorResults,
+    calculatorResults,
     targetCurrency,
     setInputAmount,
     setInputCurrency,
-    setPreviousCalculatorResults,
+    setCalculatorResults,
     setTargetCurrency,
   } = useAppContext();
 
-  const updateAmount = (newAmount) => {
+  const updateInputAmount = (newAmount) => {
     setInputAmount(newAmount);
   };
 
@@ -44,9 +44,7 @@ const Calculator = () => {
       currencies
     );
 
-    setPreviousCalculatorResults(
-      updateCalculatorResults(previousCalculatorResults, entry)
-    );
+    setCalculatorResults(updateCalculatorResults(calculatorResults, entry));
   };
 
   return (
@@ -57,7 +55,7 @@ const Calculator = () => {
           label="from"
           selectedValue={inputAmount}
           type="number"
-          setInputValue={updateAmount}
+          setInputValue={updateInputAmount}
         />
         <Input
           options={currencies}
@@ -77,11 +75,11 @@ const Calculator = () => {
         />
         <Button onClick={handleSubmit} />
       </div>
-      {previousCalculatorResults.length > 0 && (
+      {calculatorResults.length > 0 && (
         <>
           <p className="subTitle">Result</p>
           <div className="results">
-            {previousCalculatorResults.map((result) => (
+            {calculatorResults.map((result) => (
               <div key={result.inputAmount * Math.random()} className="result">
                 <p>
                   {result.inputAmount} {result.originCurrency}

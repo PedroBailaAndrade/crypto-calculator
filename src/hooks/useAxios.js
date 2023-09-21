@@ -10,7 +10,6 @@ export const useAxios = (param) => {
 
   const fetchData = async (param) => {
     try {
-      setLoading(true);
       const result = await axios(param);
       setData(result.data);
     } catch (err) {

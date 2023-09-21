@@ -15,10 +15,10 @@ const Tickers = () => {
     inputCurrency,
     inputMarket,
     markets,
-    previousTickerResults,
+    tickerResults,
     setInputCurrency,
     setInputMarket,
-    setPreviousTickerResults,
+    setTickerResults,
   } = useAppContext();
 
   const updateInputCurrency = (newCurrency) => {
@@ -36,7 +36,7 @@ const Tickers = () => {
   const handleSubmit = () => {
     const tickersEntries = getMarketTickersData(tickersData);
 
-    setPreviousTickerResults(tickersEntries);
+    setTickerResults(tickersEntries);
   };
 
   return (
@@ -60,7 +60,7 @@ const Tickers = () => {
         <Button onClick={handleSubmit} />
       </div>
       <div className="tickers-results">
-        {previousTickerResults.map((ticker) => (
+        {tickerResults.map((ticker) => (
           <TickerCard key={Math.random()} ticker={ticker} />
         ))}
       </div>

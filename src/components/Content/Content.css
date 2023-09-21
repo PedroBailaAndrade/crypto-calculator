@@ -1,4 +1,11 @@
 .content {
   margin: 96px auto auto;
   max-width: 870px;
+  padding-bottom: 55px;
+}
+
+@media (max-width: 900px) {
+  .content {
+    padding: 0 10px 55px;
+  }
 }

@@ -1,109 +1,94 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAxios } from "./hooks/useAxios";
 
-const AppContext = createContext("");
-
-const AppProvider = ({ children }) => {
-  const tabs = ["calculator", "tickers"];
-
-  const [activeTab, setActiveTab] = useState(tabs[0]);
-  const [currencies, setCurrencies] = useState([]);
-  const [inputAmount, setInputAmount] = useState(159);
-  const [inputCurrency, setInputCurrency] = useState({
+const tabs = ["calculator", "tickers"];
+const initialCurrencies = [
+  {
     id: "bitcoin",
     symbol: "btc",
     name: "Bitcoin",
-  });
-  const [inputMarket, setInputMarket] = useState({
-    id: "binance",
-    name: "Binance",
-  });
-  const [loading, setLoading] = useState(true);
-  const [markets, setMarkets] = useState([]);
-  const [previousCalculatorResults, setPreviousCalculatorResults] = useState(
-    []
-  );
-  const [previousTickerResults, setPreviousTickerResults] = useState([]);
-  const [targetCurrency, setTargetCurrency] = useState({
+  },
+  {
     id: "ethereum",
     symbol: "eth",
     name: "Ethereum",
-  });
+  },
+];
+const initialMarkets = [
+  {
+    id: "binance",
+    name: "Binance",
+  },
+];
+
+const AppContext = createContext("");
+
+const AppProvider = ({ children }) => {
+  const [activeTab, setActiveTab] = useState(tabs[0]);
+  const [currencies, setCurrencies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [markets, setMarkets] = useState([]);
+
+  const [inputAmount, setInputAmount] = useState(159);
+  const [inputCurrency, setInputCurrency] = useState(initialCurrencies[0]);
+  const [inputMarket, setInputMarket] = useState(initialMarkets[0]);
+  const [targetCurrency, setTargetCurrency] = useState(initialCurrencies[1]);
+
+  const [tickerResults, setTickerResults] = useState([]);
+  const [calculatorResults, setCalculatorResults] = useState([]);
 
   const allCurrencies = useAxios("coins/list");
   const supportedCurrencies = useAxios("simple/supported_vs_currencies");
   const marketsResult = useAxios("exchanges/list");
 
   useEffect(() => {
-    let timer;
-
-    if (
-      !allCurrencies.loading &&
-      !allCurrencies.error &&
-      allCurrencies.data.length > 0 &&
-      !supportedCurrencies.loading &&
-      !supportedCurrencies.error &&
-      supportedCurrencies.data.length > 0 &&
-      !marketsResult.error &&
-      !marketsResult.loading &&
-      marketsResult.data.length > 0
-    ) {
-      timer = setTimeout(() => {
-        setLoading(false);
-      }, 700);
-    }
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [allCurrencies, supportedCurrencies, marketsResult]);
-
-  useEffect(() => {
-    if (
-      !loading &&
-      !allCurrencies.loading &&
-      allCurrencies.data.length > 0 &&
-      !supportedCurrencies.loading &&
-      supportedCurrencies.data.length > 0
-    ) {
+    if (allCurrencies.data !== null && supportedCurrencies.data !== null) {
       setCurrencies(
         allCurrencies.data.filter((object) =>
           supportedCurrencies.data.includes(object.symbol)
         )
       );
     }
-  }, [
-    allCurrencies.data,
-    allCurrencies.loading,
-    supportedCurrencies.data,
-    supportedCurrencies.loading,
-    loading,
-  ]);
+  }, [allCurrencies.data, supportedCurrencies.data]);
 
   useEffect(() => {
-    if (!loading && !marketsResult.loading && marketsResult.data.length > 0) {
+    if (marketsResult.data !== null) {
       setMarkets(marketsResult.data);
     }
-  }, [marketsResult.data, marketsResult.loading, loading]);
+  }, [marketsResult.data]);
+
+  useEffect(() => {
+    let timer;
+
+    if (currencies.length > 0 && markets.length > 0) {
+      timer = setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [currencies, markets]);
 
   const value = {
     activeTab,
+    calculatorResults,
     currencies,
     inputAmount,
     inputCurrency,
     inputMarket,
     loading,
     markets,
-    previousCalculatorResults,
-    previousTickerResults,
     tabs,
     targetCurrency,
+    tickerResults,
     setActiveTab,
     setInputAmount,
     setInputCurrency,
     setInputMarket,
-    setPreviousCalculatorResults,
-    setPreviousTickerResults,
+    setCalculatorResults,
+    setTickerResults,
     setTargetCurrency,
   };
 

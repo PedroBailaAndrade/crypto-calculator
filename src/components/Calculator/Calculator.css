@@ -46,6 +46,7 @@
   color: #5f5f5b;
   letter-spacing: 0;
   line-height: 17.92px;
+  text-align: center;
 }
 
 .result:last-of-type {
@@ -78,4 +79,20 @@
 
 .result:last-of-type span {
   color: #454b51;
+}
+
+@media (max-width: 900px) {
+  .calculator-content-wrapper {
+    grid-template-columns: none;
+  }
+
+  .arrowTo {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .arrowTo img {
+    transform: rotate(90deg);
+    width: 49px;
+  }
 }

@@ -9,6 +9,8 @@
   margin-bottom: 78px;
 }
 
-.tickers-results {
-  padding-bottom: 55px;
+@media (max-width: 900px) {
+  .tickers-content-wrapper {
+    grid-template-columns: none;
+  }
 }

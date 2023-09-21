@@ -8,14 +8,8 @@ const Wrapper = () => {
   const { loading } = useAppContext();
   return (
     <div className="wrapper">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Navigation />
-          <Content />
-        </>
-      )}
+      <Navigation />
+      {loading ? <Loader /> : <Content />}
     </div>
   );
 };
